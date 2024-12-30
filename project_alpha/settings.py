@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -138,15 +141,15 @@ MEDIA_URL = "/files/"
 # AWS configuration
 
 
-AWS_ACCESS_KEY_ID = 'AKIA2NK3X5JOXBXMD4EZ' 
-AWS_SECRET_ACCESS_KEY = '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' 
+AWS_ACCESS_KEY_ID = os.getenv(AWS_ACCESS_KEY_ID)
+AWS_SECRET_ACCESS_KEY = os.getenv(AWS_SECRET_ACCESS_KEY)
 
 
 
 # Basic Storage configuration for Amazon S3 (Irrespective of Django versions)
 
 
-AWS_STORAGE_BUCKET_NAME = 'blogers-who-bucket' # - Enter your S3 bucket name HERE
+AWS_STORAGE_BUCKET_NAME = os.getenv(AWS_STORAGE_BUCKET_NAME) # - Enter your S3 bucket name HERE
 
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
