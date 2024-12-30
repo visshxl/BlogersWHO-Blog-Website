@@ -8,22 +8,77 @@
     <link rel="stylesheet" href="{% static "blog/post-details.css" %}"> 
 {% endblock %} 
 {% block content %}
-    <section id="summary">
-        <h2>{{post.title}}</h2>
-        <div>
-            {% for tag in post_tags %}
-                <span class="tag">{{tag.caption}}</span>
-            {% endfor %}
-        </div>
-        <article>
-            <img src="{{ post.img_name.url }}">
-            <address>By <a href = "mailto:{{post.author.email}}">{{post.author|title}}</a></address>
-            <div> Last updated on <time>{{post.date}}</time></div>
-        </article>
-    </section>
 
-    <main>
-        {{post.content|linebreaks}} 
-    </main>
+{% if comment_form.errors %}
+    <div id="alert">
+        <h2>Saving The Comment Failed!</h2>
+        <p>Please check the comment form below and fix the errors.</p>
+        <a href="#comment-form">Fix!</a>
+    </div>
+{% endif %}
+
+<section id="summary">
+    <h2>{{post.title}}</h2>
+    <div>
+        {% for tag in post_tags %}
+            <span class="tag">{{tag.caption}}</span>
+        {% endfor %}
+    </div>
+    <div id="read-later">
+        <form action="{% url "read-later" %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" value="{{ post.id }}" name="post_id">
+            <button>
+                {% if saved_for_later %}
+                    Remove from "Read Later"
+                {% else %}
+                    Read Later
+                {% endif %}
+            </button>
+        </form>
+    </div>
+    <article>
+        <img src="{{ post.img_name.url }}">
+        <address>By <a href = "mailto:{{post.author.email}}">{{post.author|title}}</a></address>
+        <div> Last updated on <time>{{post.date}}</time></div>
+    </article>
+</section>
+
+<main>
+    {{post.content|linebreaks}} 
+</main>
+
+<section id="comments">
+    <ul>
+        <h1> User Comments: </h1>
+        {% if not comments %}
+            <p>No comments yet!</p>
+        {% endif %}
+        {% for comment in comments %}
+            <li>
+                <h2>{{comment.user_name}}</h2>
+                <p>{{comment.text|linebreaks}}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section id="comment-form">
+    <h2>Your Comment</h2>
+    {% comment %} post detail page is taken from the name in the urls.py {% endcomment %}
+    {% comment %} this action will take us to the same page and if some error occur we'll get the
+    same populated data on the same page {% endcomment %}
+    <form action="{% url "posts-details-page" post.slug %}" method = "POST">
+        {% csrf_token %}
+        {% for form_feild in comment_form  %}
+            <div class="form-control {% if form_feild.errors %}invalid{% endif %}">
+                {{ form_feild.label_tag }}
+                {{ form_feild }}
+                {{ form_feild.errors }}
+            </div>
+        {% endfor %}
+        <button>Save Comment</button>
+    </form>
+</section>
 
 {% endblock %}  

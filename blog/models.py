@@ -38,3 +38,15 @@ class Posts(models.Model):
     
     class Meta:
         verbose_name_plural = 'Post Details'
+
+class comments(models.Model):
+    user_name = models.CharField(max_length=30)
+    email = models.EmailField()
+    date = models.DateTimeField(auto_now_add=True)
+    text = models.TextField(max_length=250)
+    post = models.ForeignKey(Posts, on_delete=models.CASCADE, related_name="comments")
+
+    def __str__(self):
+        return self.user_name
+    class Meta:
+        verbose_name_plural = 'Comments'

@@ -1,43 +1,86 @@
 body {
-    background-color: #e7e7e7;
-  }
-  
-  #main-navigation {
-    background-color: #390281;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  }
-  
-  #all-posts {
-    margin: 7rem auto;
-    width: 90%;
-    max-width: 60rem;
-  }
-  
-  #all-posts h2 {
-    text-align: center;
-    font-size: 2rem;
-    color: #2e2e2e;
-    margin: 3rem 0;
-  }
-  
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
-    gap: 1.5rem;
-  }
-  
-  .post img {
-    width: 7rem;
-    height: 7rem;
-  }
-  
-  .post a {
-    height: 22rem;
-    transform-origin: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    border-radius: 12px;
-    background-color: white;
-  }
+  background-color: #f4f4f9; /* Slightly lighter background for a clean look */
+}
+
+#main-navigation {
+  background-color: #390281;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+#all-posts {
+  margin: 7rem auto;
+  padding: 2rem; /* Added padding for better spacing */
+  width: 90%;
+  max-width: 60rem;
+  background: linear-gradient(to bottom right, #ffffff, #f3f3f3); /* Subtle gradient */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow for depth */
+}
+
+#all-posts h2 {
+  text-align: center;
+  font-size: 2.5rem; /* Slightly larger font size */
+  color: #2e2e2e;
+  margin: 3rem 0;
+  font-family: 'Arial', sans-serif; /* Consistent font styling */
+  text-transform: uppercase; /* Added emphasis */
+  letter-spacing: 1px; /* Improved readability */
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 1.5rem;
+}
+
+.post img {
+  width: 100%; /* Full width for responsive scaling */
+  height: 12rem; /* Adjusted height for better proportions */
+  border-top-left-radius: 12px; /* Rounded corners */
+  border-top-right-radius: 12px;
+  object-fit: cover; /* Ensure images are well-fitted */
+}
+
+.post a {
+  display: block;
+  height: auto; /* Adjust height to fit content */
+  transform-origin: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+  border-radius: 12px;
+  background-color: white;
+  text-decoration: none; /* Remove default link styling */
+  overflow: hidden; /* Ensure content stays within the box */
+  transition: all 0.3s ease-in-out; /* Smooth transitions */
+}
+
+.post a:hover,
+.post a:active {
+  transform: scale(1.03); /* Slight zoom on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  background-color: #f0f0f0; /* Subtle hover background */
+}
+
+.post a h3 {
+  padding: 1rem;
+  font-size: 1.5rem;
+  color: #390281; /* Accent color for headings */
+  font-weight: bold;
+  text-align: center;
+  border-top: 1px solid #ccc; /* Divider between image and text */
+  background-color: #fff; /* Consistent background */
+}
+
+.post a:hover h3 {
+  color: #2e2e2e; /* Subtle color change on hover */
+}
+
+.post a p {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #666;
+  text-align: justify; /* Clean text alignment */
+  background-color: #fafafa; /* Subtle background for content */
+}
