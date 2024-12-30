@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['.vercel.app']
 
 INSTALLED_APPS = [
     'blog',
+    'storages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -133,3 +134,46 @@ STATICFILES_DIRS=[
 
 MEDIA_ROOT = BASE_DIR / "uploads"
 MEDIA_URL = "/files/"
+
+# AWS configuration
+
+
+AWS_ACCESS_KEY_ID = 'AKIA2NK3X5JOXBXMD4EZ' 
+AWS_SECRET_ACCESS_KEY = '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' 
+
+
+
+# Basic Storage configuration for Amazon S3 (Irrespective of Django versions)
+
+
+AWS_STORAGE_BUCKET_NAME = 'blogers-who-bucket' # - Enter your S3 bucket name HERE
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+AWS_S3_FILE_OVERWRITE = False
+
+
+
+# Django < 4.2
+
+'''
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+'''
+
+# Django 4.2 >
+
+
+STORAGES = {
+    # Media file (image) management
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+    
+    # CSS and JS file management
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+    },
+}
