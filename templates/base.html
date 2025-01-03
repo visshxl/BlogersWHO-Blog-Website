@@ -7,6 +7,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>{% block title %} Default title. {% endblock  %}</title>
         <meta name="description" content="">
+        <link rel="icon" sizes="16x16" href="{% static 'uploads/posts/favicon-16x16.png' %}">
+        <link rel="icon" sizes="32x32" href="{% static 'uploads/posts/favicon-32x32.png' %}">
+        <link rel="apple-touch-icon" sizes="76x76" href="{% static 'uploads/posts/apple-touch-icon.png' %}">
+        <link rel="apple-touch-icon" sizes="96x96" href="{% static 'uploads/posts/apple-touch-icon.png' %}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href={% static "app.css" %}>
         {% block css_files %}{% endblock %} 
